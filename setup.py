@@ -1,7 +1,7 @@
 """ Configuration for rules and listeners. processes flask response
 
 Usage:
-    ./out.py
+    python app.py
 
 Author:
     Yassir Hoossan Buksh - last edit 23|08|2023

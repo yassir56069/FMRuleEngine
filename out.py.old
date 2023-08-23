@@ -1,4 +1,6 @@
-"""Return digest and processing for response from flask service
+"""
+DEPRECATED --
+Return digest and processing for response from flask service
 
 Usage:
     ./out.py

@@ -1,13 +1,14 @@
 """ Atomic functions containing each rules for processing
 
 Usage:
-    ./out.py
+    python app.py
 
 Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
 
-from durable.lang import when_all, when_any, ruleset
+from durable.lang import *
+from durable.engine import *
 
 
 def onOfflineRule(res:list, rs:str = 'device') -> list:

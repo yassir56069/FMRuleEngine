@@ -1,7 +1,7 @@
 """ Requests class used to digest backend info into durable rules
 
 Usage:
-    ./out.py
+    python app.py
 
 Author:
     Yassir Hoossan Buksh - last edit 23|08|2023

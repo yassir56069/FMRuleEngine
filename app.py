@@ -1,4 +1,11 @@
+""" Flask application allowing for url routing to parse data into the ruleEngine
 
+Usage:
+    python app.py
+
+Author:
+    Yassir Hoossan Buksh - last edit 23|08|2023
+"""
 from urllib import parse
 
 from flask import Flask, jsonify
