@@ -7,22 +7,21 @@ Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
 
-from durable.lang import *
-from durable.engine import *
+from durable.lang import when_all, when_any, ruleset
 
 
 def onOfflineRule(res:list, rs:str = 'device') -> list:
-  """Rule determining if device is online or offline.
+    """Rule determining if device is online or offline.
 
-  Args:
-      res (list): result list to be parsed (for appending information)
-      rs (str): the ruleset to be used (default - device)
+    Args:
+    res (list): result list to be parsed (for appending information)
+    rs (str): the ruleset to be used (default - device)
 
 
-  Returns:
-      list: appends to results list
-  """
-  with ruleset(rs):
+    Returns:
+    list: appends to results list
+    """
+    with ruleset(rs):
         @when_all(m.onlineStatus == 'True')
         def online_status(c):
             res.append('Device {0} is online'.format(c.m.deviceID))
@@ -31,7 +30,7 @@ def onOfflineRule(res:list, rs:str = 'device') -> list:
         def offline_status(c):
             res.append('Device {0} is offline'.format(c.m.deviceID))
 
-  return res 
+    return res
 
 # def statusRule(res:list, rs:str = 'device') -> list:
 #     """Rule determining if device is on or off.
