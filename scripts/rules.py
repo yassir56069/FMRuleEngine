@@ -22,42 +22,38 @@ def onOfflineRule(res:list, rs:str = 'device') -> list:
   Returns:
       list: appends to results list
   """
-
   with ruleset(rs):
-      @when_all(m.onlineStatus == True)
-      def online_status(c):
-          res.append({'Device {0} is online'.format(c.m.deviceID)})
+        @when_all(m.onlineStatus == 'True')
+        def online_status(c):
+            res.append('Device {0} is online'.format(c.m.deviceID))
 
-
-      @when_all(m.onlineStatus == False)
-      def online_status(c):
-          res.append({'Device {0} is offline'.format(c.m.deviceID)})
+        @when_all(m.onlineStatus == 'False')
+        def offline_status(c):
+            res.append('Device {0} is offline'.format(c.m.deviceID))
 
   return res 
 
-def statusRule(res:list, rs:str = 'device') -> list:
-  """Rule determining if device is on or off.
+# def statusRule(res:list, rs:str = 'device') -> list:
+#     """Rule determining if device is on or off.
 
-  Args:
-      res (list): result list to be parsed (for appending information)
-      rs (str): the ruleset to be used (default - device)
-
-
-  Returns:
-      list: appends to results list
-  """
-
-  with ruleset(rs):
-      @when_all(m.status == True)
-      def online_status(c):
-          res.append({'Device {0} is on'.format(c.m.deviceID)})
-
-      @when_all(m.status == False)
-      def online_status(c):
-          res.append({'Device {0} is off'.format(c.m.deviceID)})
+#     Args:
+#         res (list): result list to be parsed (for appending information)
+#         rs (str): the ruleset to be used (default - device)
 
 
-  return res 
+#     Returns:
+#         list: appends to results list
+#     """
+#     with ruleset(rs):
+#         @when_all(m.status == 'True')
+#         def on_status(c):
+#             res.append({'Device {0} is on'.format(c.m.deviceID)})
+
+#         @when_all(m.status == 'False')
+#         def off_status(c):
+#             res.append({'Device {0} is off'.format(c.m.deviceID)})
+
+#     return res
 
 
 

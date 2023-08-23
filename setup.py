@@ -6,19 +6,16 @@ Usage:
 Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
-
-from scripts.listener import Requests
-
 import scripts.rules as r
 
 res = []
 
 # rules --
 res = r.onOfflineRule(res)
+# res = r.statusRule(res)
 
 
+# # listeners for requests --
+# device_caller = Requests('device')
 
-# listeners for requests --
-device_caller = Requests('device')
-
-device_caller.call({'deviceID': '23r34feijfer0932','onlineStatus' : False, 'status': True})
+# device_caller.call({'deviceID': '23r34feijfer0932','onlineStatus' : False, 'status': True})

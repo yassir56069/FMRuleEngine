@@ -7,33 +7,25 @@ Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
 
-from flask import Flask
+from flask import Flask, jsonify
+from urllib import parse
 from setup import res
 
-app = Flask(__name__)
+
+import scripts.rules as r
+
+
 
 if len(res) > 0:
     if len(res) == 1:
         print('There is 1 Notification to send: ')
-    else: 
+    else:
         print(f'There are {len(res)} Notifications to send:')
-    
-    print(res)
+
+    print(jsonify(res))
 else:
     print('No notifications to send')
 
+print(parse.urlencode({'deviceID': '23r34feijfer0932','onlineStatus' : False, 'status': True}))
 
 
-
-@app.route('/')
-def test():
-    """Test"""
-    print('test')
-    return 'test. change route with /change'
-
-
-@app.route('/change/<device>')
-def updateDeviceOnOff(device_data:dict):
-    print(f'Updating device {device_data["deviceID"]}')
-    res = r.onOfflineRule(device_data)
-    return jsonify(res)
