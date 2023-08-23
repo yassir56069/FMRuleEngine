@@ -7,15 +7,21 @@ Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
 from urllib import parse
-
 from flask import Flask, jsonify
 from scripts.listener import Requests
 from setup import res
+
+
+RES_LOG_SIZE = 2 # storage of old responses
+
 
 app = Flask(__name__)
 
 # listeners for requests --
 device_caller = Requests('device')
+
+
+
 
 @app.route('/')
 def test():
@@ -27,6 +33,10 @@ def test():
 @app.route('/update/<device_data>')
 def update(device_data:str):
     """update device data"""
+
+    # remove old response
+    res.pop()
+
     device_caller.call(dict(parse.parse_qsl(device_data)))
 
     return jsonify({'response_query': res})

@@ -9,7 +9,7 @@ Author:
 
 from durable.lang import *
 from durable.engine import *
-
+import time
 
 def onOfflineRule(res:list, rs:str = 'device') -> list:
     """Rule determining if device is online or offline.
@@ -25,11 +25,11 @@ def onOfflineRule(res:list, rs:str = 'device') -> list:
     with ruleset(rs):
         @when_all(m.onlineStatus == 'True')
         def online_status(c):
-            res.append('Device {0} is online'.format(c.m.deviceID))
+            res.append('Device {0} is online. time: {1}'.format(c.m.deviceID, time.time()))
 
         @when_all(m.onlineStatus == 'False')
         def offline_status(c):
-            res.append('Device {0} is offline'.format(c.m.deviceID))
+            res.append('Device {0} is offline. time: {1}'.format(c.m.deviceID, time.time()))
 
     return res
 
