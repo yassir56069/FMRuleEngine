@@ -11,7 +11,7 @@ import scripts.rules as r
 res = []
 
 # rules --
-res = r.onOfflineRule(res)
+res = r.device_ruleset(res)
 # res = r.statusRule(res)
 
 

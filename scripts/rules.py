@@ -7,12 +7,13 @@ Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
 
+import time
 from durable.lang import *
 from durable.engine import *
-import time
 
-def onOfflineRule(res:list, rs:str = 'device') -> list:
-    """Rule determining if device is online or offline.
+
+def device_ruleset(res:list) -> list:
+    """Ruleset in place for the device 
 
     Args:
     res (list): result list to be parsed (for appending information)
@@ -22,7 +23,7 @@ def onOfflineRule(res:list, rs:str = 'device') -> list:
     Returns:
     list: appends to results list
     """
-    with ruleset(rs):
+    with ruleset('device'):
         @when_all(m.onlineStatus == 'True')
         def online_status(c):
             res.append('Device {0} is online. time: {1}'.format(c.m.deviceID, time.time()))

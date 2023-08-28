@@ -10,7 +10,7 @@ from urllib import parse
 from flask import Flask, jsonify
 from scripts.listener import Requests
 from setup import res
-
+import requests
 
 RES_LOG_SIZE = 2 # storage of old responses
 
@@ -21,6 +21,18 @@ app = Flask(__name__)
 device_caller = Requests('device')
 
 
+
+# The API endpoint
+URL = "https://iconektback.tech/iconekt/devices-list/7/"
+
+# A GET request to the API
+response = requests.get(URL, timeout=5)
+
+# Print the response
+res = response.json()
+
+
+print(parse.urlencode({'deviceID': '23r34feijfer0932','onlineStatus' : False, 'status': True}))
 
 
 @app.route('/')
