@@ -6,12 +6,20 @@ Usage:
 Author:
     Yassir Hoossan Buksh - last edit 23|08|2023
 """
-import scripts.rules as r
+import scripts.rules.Device_ruleset as dr
 
-res = []
+
+OUT_LOG_SIZE = 10 # storage of old responses
+
+out = []
+
+
+# API endpoint
+URL = "https://iconektback.tech/iconekt/devices-list/7/"
+
 
 # rules --
-res = r.device_ruleset(res)
+out = dr.device_ruleset(out)
 # res = r.statusRule(res)
 
 

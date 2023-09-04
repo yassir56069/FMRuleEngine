@@ -9,10 +9,9 @@ Author:
 from urllib import parse
 from flask import Flask, jsonify
 from scripts.listener import Requests
-from setup import res
+from setup import out, URL, OUT_LOG_SIZE
 import requests
 
-RES_LOG_SIZE = 2 # storage of old responses
 
 
 app = Flask(__name__)
@@ -21,10 +20,6 @@ app = Flask(__name__)
 device_caller = Requests('device')
 
 
-
-# The API endpoint
-URL = "https://iconektback.tech/iconekt/devices-list/7/"
-
 # A GET request to the API
 response = requests.get(URL, timeout=5)
 
@@ -32,26 +27,19 @@ response = requests.get(URL, timeout=5)
 res = response.json()
 
 
-print(parse.urlencode({'deviceID': '23r34feijfer0932','onlineStatus' : False, 'status': True}))
+print(res)
 
 
 @app.route('/')
-def test():
-    """Test"""
-    print('test')
-    return 'test. change route with /update'
+def call_rule():
+    """whenever url is accessed rule is processed"""
 
+    if len(out) > OUT_LOG_SIZE:
+        out.pop(0)
 
-@app.route('/update/<device_data>')
-def update(device_data:str):
-    """update device data"""
+    device_caller.call(res['tuya_devices'][0])
 
-    # remove old response
-    res.pop()
-
-    device_caller.call(dict(parse.parse_qsl(device_data)))
-
-    return jsonify({'response_query': res})
+    return jsonify({'response_query': out})
 
 
 if __name__ == '__main__':

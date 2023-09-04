@@ -24,13 +24,13 @@ def device_ruleset(res:list) -> list:
     list: appends to results list
     """
     with ruleset('device'):
-        @when_all(m.onlineStatus == 'True')
+        @when_all(m.online == True)
         def online_status(c):
-            res.append('Device {0} is online. time: {1}'.format(c.m.deviceID, time.time()))
+            res.append('Device {0} is online. time: {1}'.format(c.m.device_id, time.time()))
 
-        @when_all(m.onlineStatus == 'False')
+        @when_all(m.online == False)
         def offline_status(c):
-            res.append('Device {0} is offline. time: {1}'.format(c.m.deviceID, time.time()))
+            res.append('Device {0} is offline. time: {1}'.format(c.m.device_id, time.time()))
 
     return res
 
